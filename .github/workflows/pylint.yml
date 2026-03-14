@@ -1,0 +1,24 @@
+name: SPCI
+
+on: [push]
+
+jobs:
+  sast_scan:
+    name: Bandit security scan
+    runs-on: ubuntu_latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: install Bandit
+      run: pip install bandit
+
+    - name: Run Bandit Scan
+      run: bandit -r .
+      
