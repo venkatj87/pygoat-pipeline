@@ -7,6 +7,9 @@ WORKDIR /app
 
 # dependencies for psycopg2
 RUN apt-get update && apt-get install --no-install-recommends -y dnsutils libpq-dev python3-dev && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    dnsutils libpq-dev python3-dev gcc && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
