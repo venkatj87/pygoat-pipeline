@@ -1,54 +1,53 @@
-# ── Level 0: no dependencies on anything else in this list ──
+# ── Level 0: no internal dependencies ──
 pycparser==3.0
 defusedxml==0.7.1
 mccabe==0.7.0
 pycodestyle==2.14.0
 pyflakes==3.4.0
-PyYAML>=6.0
-PyJWT>=2.4
-Pillow>=9.4
-psycopg2-binary>=2.9
-pytz>=2022.1
+PyJWT==2.12.1
+PyYAML==6.0.3
+Pillow==12.1.1
+psycopg2-binary==2.9.11
+pytz==2026.1.post1
 Werkzeug==3.1.6
 whitenoise==6.12.0
 zipp==3.23.0
 gunicorn==25.1.0
-oauthlib>=3.2
+oauthlib==3.3.1
 dj-database-url==0.5.0
+python3-openid==3.2.0
 
-# ── Level 1: depends only on Level 0 ──
-cffi==2.0.0              # needs: pycparser
-asgiref==3.11.1
-sqlparse>=0.4
-idna>=3.4
-certifi>=2022.12
-charset-normalizer>=2.1
-urllib3>=1.26
+# ── Level 1: depends on Level 0 ──
+cffi==2.0.0
+sqlparse==0.5.5
+idna==3.11
+certifi==2026.2.25
+charset-normalizer==3.4.5
+urllib3==2.6.3
 
 # ── Level 2: depends on Level 1 ──
-cryptography==46.0.5     # needs: cffi
-argon2-cffi-bindings==25.1.0  # needs: cffi
+cryptography==46.0.5
+argon2-cffi-bindings==25.1.0
 
 # ── Level 3: depends on Level 2 ──
-argon2-cffi==25.1.0      # needs: argon2-cffi-bindings
+argon2-cffi==25.1.0
 
-# ── Level 4: depends on Level 1 (network stack) ──
-requests>=2.28           # needs: certifi, charset-normalizer, idna, urllib3
+# ── Level 4: depends on Level 1 ──
+requests==2.32.5
 
 # ── Level 5: depends on requests + oauthlib ──
-requests-oauthlib>=1.3   # needs: oauthlib, requests
+requests-oauthlib==2.0.0
 
-# ── Level 6: depends on defusedxml ──
-python3-openid>=3.2      # needs: defusedxml
+# ── Level 6: core Django (depends on asgiref, sqlparse) ──
+asgiref==3.11.1
+Django==4.2.29
 
-# ── Level 7: core Django (depends on asgiref, sqlparse) ──
-Django>=3.2              # needs: asgiref, sqlparse
+# ── Level 7: depends on Django ──
+djangorestframework==3.16.1
+django-cors-headers==4.9.0
+django-crispy-forms==2.6
+django-heroku==0.3.1
+django-allauth==65.15.0
 
-# ── Level 8: everything that depends on Django ──
-djangorestframework>=3.13     # needs: Django
-django-cors-headers>=3.11     # needs: asgiref, Django
-django-crispy-forms>=1.14.0   # needs: Django
-django-heroku>=0.3.1          # needs: Django (indirectly)
-
-# ── Level 9: depends on Django + django-crispy-forms ──
-crispy-bootstrap4==2026.2     # needs: Django, django-crispy-forms
+# ── Level 8: depends on Django + django-crispy-forms ──
+crispy-bootstrap4==2026.2
