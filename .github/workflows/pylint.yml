@@ -38,14 +38,10 @@ jobs:
       run: docker build -f Dockerfile -t myapp:latest .
 
     - name: Docker scout install
-      run: |
-        curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
-        sh install-scout.sh
-
-        echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
-        
-        docker-scout quickview
-        docker-scout cves
-    
+      uses: docker/scout-action@v1.20.2
+      with:
+        dockerhub-user: ${{ secrets.DOCKER_USER }}
+        dockerhub-password: ${{ secrets.DOCKER_PWD }}
+        command: quickview, cves
     
     
